@@ -1,4 +1,4 @@
-package com.jujianfei.jdk8newfeatures.lambda.two;
+package com.jujianfei.jdk8newfeatures.lambda.day02;
 
 import org.junit.Test;
 
@@ -30,6 +30,8 @@ import java.util.function.Consumer;
  * 上联：左右遇一括号省
  * 下联：左侧推断类型省
  * 横批：能省则省
+ * <p>
+ * 二、Lambda表达式需要“函数式接口”的支持函数式接口：接口中只有一个抽象方法的接口，称为函数式接口。
  *
  * @author Jeffery_Ju
  * @date 2019/7/31 9:49
@@ -106,6 +108,20 @@ public class TestLambda2 {
     public void test6() {
         //Comparator<Integer> comparator = (Integer x, Integer y) -> Integer.compare(x, y);
         Comparator<Integer> comparator2 = (x, y) -> Integer.compare(x, y);
-
     }
+
+    /**
+     * 需求: 对一个数进行运算
+     */
+    @Test
+    public void test7() {
+        System.out.println(operation(100, x -> x * x));
+
+        System.out.println(operation(200, x -> x + 200));
+    }
+
+    public Integer operation(Integer num, MyFun myFun) {
+        return myFun.getValue(num);
+    }
+
 }

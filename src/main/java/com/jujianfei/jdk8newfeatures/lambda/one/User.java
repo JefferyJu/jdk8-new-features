@@ -1,4 +1,4 @@
-package com.jujianfei.jdk8newfeatures.lambda;
+package com.jujianfei.jdk8newfeatures.lambda.one;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

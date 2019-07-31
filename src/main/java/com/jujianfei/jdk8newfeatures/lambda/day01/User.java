@@ -2,6 +2,8 @@ package com.jujianfei.jdk8newfeatures.lambda.day01;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 /**
  * TODO
@@ -11,6 +13,8 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class User {
 
     private String name;

@@ -35,47 +35,14 @@ public class StreamTest1 {
         //3. 通过Stream类中的静态方法of()
         Stream<String> stream3 = Stream.of("aa", "bb", "cc");
 
-        //4. 创建无限流
-        //Stream.iterate()
-    }
+         //4. 创建无限流
+        // 迭代
+        Stream.iterate(0, x -> x + 2).limit(10).forEach(System.out::println);
+
+        // 生成
+        Stream.generate(() -> Math.random()).limit(5).forEach(System.out::println);
 
 
-    @Test
-    public void test2() {
-        List<List<User>> lists = new ArrayList<>();
-        List<User> users1 = new ArrayList<>();
-        users1.add(new User("jujianfei", 19, 222));
-        users1.add(new User("jujianfei2", 19, 222));
-
-        List<User> users2 = new ArrayList<>();
-        users2.add(new User("jujianfei", 19, 222));
-        users2.add(new User("jujianfei2", 19, 222));
-
-        List<User> users3 = new ArrayList<>();
-        users3.add(new User("jujianfei", 19, 222));
-        users3.add(new User("jujianfei2", 19, 222));
-        users3.add(new User("jujianfei3", 19, 222));
-        System.out.println("hash(users1) = " + hash(users1));
-        System.out.println("hash(users2) = " + hash(users2));
-        System.out.println("hash(users3) = " + hash(users3));
-        lists.add(users1);
-        lists.add(users2);
-        lists.add(users3);
-
-        Set<List<User>> set = new HashSet(lists);
-
-        for (List<User> users : set) {
-            for (User user : users) {
-                System.out.println(user);
-            }
-            System.out.println("-----------");
-        }
-    }
-
-
-    public int hash(Object key) {
-        int h;
-        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
 
 

@@ -20,6 +20,8 @@ public class User {
 
     private double salary;
 
+    private Status status;
+
 
     public User(String name) {
         this.name = name;
@@ -28,5 +30,11 @@ public class User {
     public User(String name, Integer age) {
         this.name = name;
         this.age = age;
+    }
+
+    public User(String name, int age, double salary) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
     }
 }

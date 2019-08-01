@@ -5,9 +5,7 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 import java.util.Comparator;
-import java.util.function.BiPredicate;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 /**
  * 一、方法引用:若 Lambda体中的内容有方法已经实现了,我们可以使用"方法引用"
@@ -28,6 +26,14 @@ import java.util.function.Supplier;
  * 格式：
  * <p>
  * ClassName::new
+ * <p>
+ * 注意：需要调用的构造器的参数列表要与的数式接口中抽象方法的参数列表保持一致！
+ * <p>
+ * 三、数组引用：
+ * <p>
+ * 格式:
+ * <p>
+ * Type[]::new
  *
  * @author jujianfei
  * @date 2019/7/31 19:34
@@ -82,7 +88,7 @@ public class MethodRefTest {
     }
 
     /**
-     * 构造器引用
+     * 无参构造器引用
      */
     @Test
     public void test5() {
@@ -94,5 +100,35 @@ public class MethodRefTest {
         System.out.println(supplier1.get());
     }
 
+    /**
+     * 有参构造器引用
+     */
+    @Test
+    public void test6() {
+        Function<String, User> function = name -> new User(name);
+
+        Function<String, User> function1 = User::new;
+
+        System.out.println(function1.apply("luban"));
+        //用函数式接口的抽象方法的参数列表自动匹配对应的构造器
+        BiFunction<String, Integer, User> biFunction = User::new;
+    }
+
+    /**
+     * 数组引用
+     */
+    @Test
+    public void test7() {
+        Function<Integer, String[]> func = x -> new String[x];
+        String[] strings = func.apply(10);
+        System.out.println(strings.length);
+
+        //数组引用
+
+        Function<Integer, String[]> function = String[]::new;
+        String[] strings1 = function.apply(20);
+        System.out.println(strings1.length);
+
+    }
 
 }

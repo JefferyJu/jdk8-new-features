@@ -1,17 +1,11 @@
-# Getting Started
+# 内容介绍
 
-auto
+com.jujianfei.jdk8newfeatures
 
-### Reference Documentation
-For further reference, please consider the following sections:
-
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Web Starter](https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-developing-web-applications)
-
-### Guides
-The following guides illustrate how to use some features concretely:
-
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-
+lambda:
+- day01: 简单了解java8新特性
+- day02: lambda表达式的六种语法格式
+- day03: lambda表达式练习题
+- day04: java8四大内置函数式接口
+- day05: 方法引用,构造器引用, 数组引用
+- day06: 用day04与day05的知识重做day03

@@ -3,7 +3,6 @@ package com.jujianfei.jdk8newfeatures.lambda.day01;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 /**
  * TODO
@@ -14,9 +13,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class User {
-
     private String name;
 
     private int age;
@@ -24,4 +21,12 @@ public class User {
     private double salary;
 
 
+    public User(String name) {
+        this.name = name;
+    }
+
+    public User(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
 }

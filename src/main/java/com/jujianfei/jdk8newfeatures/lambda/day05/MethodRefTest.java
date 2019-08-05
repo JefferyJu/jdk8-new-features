@@ -84,6 +84,8 @@ public class MethodRefTest {
         BiPredicate<String, String> biPredicate = (x, y) -> x.equals(y);
 
         BiPredicate<String, String> biPredicate1 = String::equals;
+        //参数是实例方法的调用者即可使用类名::实例方法名
+        Consumer<String> stringConsumer = String::toUpperCase;
 
     }
 

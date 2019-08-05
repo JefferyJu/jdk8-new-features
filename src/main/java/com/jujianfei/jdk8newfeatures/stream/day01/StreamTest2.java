@@ -98,7 +98,7 @@ public class StreamTest2 {
      * 映射
      * map------接收 Lambda,将元素转换成其他形式或提取信息,接收一个函数作为参数,
      * 该函数会被应用到每个元素上,并将其映射成一个新的元素
-     * flatMap------接收一个的数作为参数,将流中的每个值都换成另一个流,然后把所有流连接成一个淡
+     * flatMap------接收一个的数作为参数,将流中的每个值都换成另一个流,然后把所有流连接成一个流
      */
     @Test
     public void test5() {
@@ -110,6 +110,7 @@ public class StreamTest2 {
 
         System.out.println("------------2----------");
 
+        //map() 可以提取User中的姓名
         users.stream().map(User::getName).forEach(System.out::println);
         System.out.println("-----------3----------");
 

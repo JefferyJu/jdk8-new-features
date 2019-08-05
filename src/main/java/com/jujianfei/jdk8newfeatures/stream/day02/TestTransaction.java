@@ -141,4 +141,12 @@ public class TestTransaction {
         System.out.println(minTransaction.get());
     }
 
+    /**
+     * 9. 名字大写
+     */
+    @Test
+    public void test9(){
+        transactions.stream().map(t -> t.getTrader().getName()).map(String::toUpperCase).forEach(System.out::println);
+    }
+
 }

@@ -14,4 +14,6 @@
 
 - day01: streamAPI讲解
 - day02: StreamAPI练习
+- day03: 并行流和串行流
+- day04: optioanal类
 

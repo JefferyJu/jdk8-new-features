@@ -16,4 +16,7 @@
 - day02: StreamAPI练习
 - day03: 并行流和串行流
 - day04: optioanal类
+- day05: 接口默认方法与静态方法
+- day06: 日期与时间
+
 

@@ -70,8 +70,6 @@ public class SimpleDateFormatTest {
                 namedThreadFactory,
                 new ThreadPoolExecutor.AbortPolicy());
 
-        //pool.execute(() -> System.out.println(Thread.currentThread().getName()));
-
         List<Future<Date>> results = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             results.add(pool.submit(task));
@@ -102,8 +100,6 @@ public class SimpleDateFormatTest {
                 new LinkedBlockingQueue<Runnable>(1024),
                 namedThreadFactory,
                 new ThreadPoolExecutor.AbortPolicy());
-
-        //pool.execute(() -> System.out.println(Thread.currentThread().getName()));
 
         List<Future<LocalDate>> results = new ArrayList<>();
         for (int i = 0; i < 10; i++) {

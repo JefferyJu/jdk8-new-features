@@ -4,9 +4,7 @@ import org.junit.Test;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAccessor;
+import java.time.temporal.*;
 
 /**
  * TODO
@@ -65,8 +63,12 @@ public class LocalDateTimeTest {
         System.out.println("LocalDateTime.now().range(ChronoField.HOUR_OF_DAY) = " + LocalDateTime.now().range(ChronoField.HOUR_OF_DAY));
         System.out.println("LocalDateTime.now().range(ChronoField.DAY_OF_WEEK) = " + LocalDateTime.now().range(ChronoField.DAY_OF_WEEK));
         System.out.println("LocalDateTime.now().range(ChronoField.MONTH_OF_YEAR) = " + LocalDateTime.now().range(ChronoField.MONTH_OF_YEAR));
-        //截取
+        //截取日期时间
         System.out.println("LocalDateTime.now().truncatedTo(ChronoUnit.HOURS) = " + LocalDateTime.now().truncatedTo(ChronoUnit.HALF_DAYS));
+        //两日期时间的差值(小值在前, 大值在后)
+        System.out.println("ldt1.until(ldt2, ChronoUnit.DAYS) = " + ldt1.until(ldt2, ChronoUnit.DAYS));
+        System.out.println("ldt1.until(ldt2, ChronoUnit.YEARS) = " + ldt1.until(ldt2, ChronoUnit.MONTHS));
+        System.out.println("ldt1.until(ldt2, ChronoUnit.YEARS) = " + ldt1.until(ldt2, ChronoUnit.YEARS));
     }
 
     /**
@@ -84,12 +86,12 @@ public class LocalDateTimeTest {
         System.out.println(now.toEpochMilli());
         //从毫秒获取Instant
         Instant instant = Instant.ofEpochSecond(1);
-        System.out.println("Instant.ofEpochSecond(1000) = " + instant );
+        System.out.println("Instant.ofEpochSecond(1000) = " + instant);
     }
 
     /**
-     *  Duration：计算两个"时间"之间的间隔
-     *  Period：计算两个"日期"之间的间隔
+     * Duration：计算两个"时间"之间的间隔
+     * Period：计算两个"日期"之间的间隔
      */
     @Test
     public void test3() throws InterruptedException {
@@ -132,11 +134,88 @@ public class LocalDateTimeTest {
         LocalDate now = LocalDate.now();
 
         Period period = Period.between(ld1, now);
-        System.out.println(period);
-        System.out.println(period.getDays());
-        System.out.println(period.getMonths());
-        System.out.println(period.getYears());
-        System.out.println(period.toTotalMonths());
+        System.out.println("ISO标准计数: " + period);
+        System.out.println("年: " + period.getYears());
+        System.out.println("月: " + period.getMonths());
+        System.out.println("日: " + period.getDays());
+        System.out.println("总月份: " + period.toTotalMonths());
+        System.out.println("总天数: " + Math.abs(now.until(ld1, ChronoUnit.DAYS)));
+
+    }
+
+    /**
+     * TemporalAdjuster: 时间校正器
+     * TemporalAdjusters: 工具类
+     */
+    @Test
+    public void test4() {
+        LocalDateTime ldt = LocalDateTime.now();
+        System.out.println(ldt);
+        LocalDateTime ldt2 = ldt.withDayOfMonth(10);
+        System.out.println(ldt2);
+        //下个周日
+        LocalDateTime ldt3 = ldt.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
+        System.out.println(ldt3);
+        //自定义: 下一个工作日
+        System.out.println(ldt.with(temporal -> {
+            LocalDateTime ldt4 = (LocalDateTime) temporal;
+            DayOfWeek dayOfWeek = ldt4.getDayOfWeek();
+            if (dayOfWeek.equals(DayOfWeek.FRIDAY)) {
+                return ldt4.plusDays(3);
+            } else if (dayOfWeek.equals(DayOfWeek.SATURDAY)) {
+                return ldt4.plusDays(2);
+            } else {
+                return ldt4.plusDays(1);
+            }
+        }));
+    }
+
+    /**
+     * DateTimeFormatter: 格式化时间/日期
+     */
+    @Test
+    public void test5() {
+        //格式化
+        DateTimeFormatter dtf = DateTimeFormatter.ISO_DATE;
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("now = " + now.format(dtf));
+
+        System.out.println("-----------------------------------");
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        System.out.println(pattern.format(now));
+        System.out.println(now.format(pattern));
+
+        // 解析
+        String dateStr = "2019-08-06 21:19:43";
+        LocalDateTime ldt = LocalDateTime.parse(dateStr, pattern);
+        System.out.println(ldt);
+    }
+
+    /**
+     * ZoneDate ZoneTime ZoneDateTime
+     */
+    @Test
+    public void test6() {
+        // 显示所有时区
+        //ZoneId.getAvailableZoneIds().forEach(System.out::println);
+        System.out.println("---------------------------------------");
+
+        LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Etc/UTC"));
+        System.out.println("UTC时区的当前时间: " + localDateTime);// 2019-08-06T13:34:53.632
+        System.out.println("---------------------------------------");
+
+
+        LocalDateTime ldt2 = LocalDateTime.now();
+        System.out.println("Asia/Shanghai时区: " + ldt2);//Asia/Shanghai时区: 2019-08-06T21:39:54.806
+        ZonedDateTime zonedDateTime = ldt2.atZone(ZoneId.of("Etc/UTC"));
+        System.out.println("UTC时区: " + zonedDateTime);//UTC时区: 2019-08-06T21:39:54.806Z[Etc/UTC]
+        System.out.println("---------------------------------------");
+
+
+        LocalDateTime ldt3 = LocalDateTime.now(ZoneId.of("Etc/UTC"));
+        System.out.println("UTC时区的当前时间: " + ldt3);  //UTC时区的当前时间: 2019-08-06T13:39:54.808
+        ZonedDateTime zonedDateTime2 = ldt3.atZone(ZoneId.of("Etc/UTC"));
+        System.out.println("UTC时区的当前时间: " + zonedDateTime2); //UTC时区的当前时间: 2019-08-06T13:39:54.808Z[Etc/UTC]
 
     }
 }

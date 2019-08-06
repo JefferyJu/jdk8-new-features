@@ -133,6 +133,10 @@ public class LocalDateTimeTest {
 
         Period period = Period.between(ld1, now);
         System.out.println(period);
+        System.out.println(period.getDays());
+        System.out.println(period.getMonths());
+        System.out.println(period.getYears());
+        System.out.println(period.toTotalMonths());
 
     }
 }

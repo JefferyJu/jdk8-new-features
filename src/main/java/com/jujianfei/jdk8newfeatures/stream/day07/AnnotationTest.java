@@ -1,6 +1,5 @@
 package com.jujianfei.jdk8newfeatures.stream.day07;
 
-import lombok.NonNull;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
@@ -32,10 +31,7 @@ public class AnnotationTest {
         }
     }
 
-    @Test
-    public void test2() {
-        show();
-    }
+
 
 
 }

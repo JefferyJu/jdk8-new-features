@@ -1,9 +1,6 @@
 package com.jujianfei.jdk8newfeatures.stream.day07;
 
-import java.lang.annotation.Repeatable;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 import static java.lang.annotation.ElementType.*;
 
@@ -16,6 +13,7 @@ import static java.lang.annotation.ElementType.*;
 @Repeatable(MyAnnotations.class)
 @Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE, TYPE_PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
+@Documented
 public @interface MyAnnotation {
 
     String value() default "jujianfei";
